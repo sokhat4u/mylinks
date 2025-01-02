@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+
+        input[type="text"], button {
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        li a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Links</h1>
+        <ul>
+            {% for link_name, encoded_url in links.items() %}
+                <li><strong>{{ link_name }}</strong>: <a href="/{{ link_name }}" target="_blank">View Link</a></li>
+            {% endfor %}
+        </ul>
+
+        <h2>Add New Link</h2>
+        <form action="/save" method="POST">
+            <input type="hidden" name="secret_word" value="mypassword123">
+            <input type="text" name="link_name" placeholder="Link Name (e.g., link5)" required>
+            <input type="text" name="url" placeholder="URL" required>
+            <button type="submit">Save Link</button>
+        </form>
+    </div>
+</body>
+</html>
